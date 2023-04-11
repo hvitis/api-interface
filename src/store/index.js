@@ -4,18 +4,28 @@ import getPublicAPI from '@/services/getPublicAPI';
 
 Vue.use(Vuex);
 
+const PAGE_SIZE = 20;
+
 export default new Vuex.Store({
   state: {
     isQuerying: false,
-    apis: null,
+    pagesAvailable: 1,
+    allPublicApis: null,
+    selectedApis: null,
   },
   getters: {
-    apis: (state) => state.apis,
+    selectedApis: (state) => state.selectedApis,
     isQuerying: (state) => state.isQuerying,
+    pagesAvailable: (state) => state.pagesAvailable,
+    allPublicApis: (state) => state.allPublicApis,
   },
   mutations: {
     loadApis(state, apis) {
-      state.apis = apis;
+      state.allPublicApis = apis;
+      state.selectedApis = apis.slice(0, PAGE_SIZE);
+    },
+    setPages(state, apis) {
+      state.pagesAvailable = Math.ceil(apis.length / PAGE_SIZE);
     },
   },
   actions: {
@@ -24,11 +34,22 @@ export default new Vuex.Store({
       try {
         const data = await getPublicAPI(title, category);
         context.commit('loadApis', data.entries);
-        console.log(data.entries);
+        context.commit('setPages', data.entries);
       } catch (error) {
         console.log(error);
       }
       context.state.isQuerying = false;
+    },
+    async getPaginatedResults(context, { currentPage }) {
+      const start = currentPage === 1 ? 0 : (currentPage - 1) * 20;
+      const end =
+        currentPage === context.state.pagesAvailable
+          ? context.state.allPublicApis.length
+          : currentPage * 20;
+      context.state.selectedApis = context.state.allPublicApis.slice(
+        start,
+        end
+      );
     },
   },
   modules: {},

@@ -1,7 +1,18 @@
 <template>
-  <TableApi :isQuerying="isQuerying">
-    <CardApi v-for="(item, index) of apis" :key="index" :item="item" />
-  </TableApi>
+  <div>
+    <TableApi :isQuerying="isQuerying">
+      <CardApi
+        v-for="(item, index) of selectedApis"
+        :key="index"
+        :item="item"
+      />
+    </TableApi>
+    <v-pagination
+      v-model="currentPage"
+      class="my-4"
+      :length="pagesAvailable"
+    ></v-pagination>
+  </div>
 </template>
 
 <script>
@@ -11,17 +22,28 @@ import CardApi from '@/components/CardApi.vue';
 
 export default {
   components: { TableApi, CardApi },
+  data() {
+    return {
+      currentPage: 1,
+    };
+  },
+  watch: {
+    currentPage(currentPage) {
+      this.getPaginatedResults({ currentPage });
+    },
+  },
   computed: {
     ...mapGetters({
-      apis: 'apis',
       isQuerying: 'isQuerying',
+      selectedApis: 'selectedApis',
+      pagesAvailable: 'pagesAvailable',
     }),
   },
   mounted() {
-    let title = 'geo';
+    let title = '';
     let category = '';
     this.fetchApi({ title, category });
   },
-  methods: mapActions(['fetchApi']),
+  methods: mapActions(['fetchApi', 'getPaginatedResults']),
 };
 </script>
