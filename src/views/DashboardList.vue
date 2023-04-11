@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TableApi msg="Welcome" />
+    <TableApi :msg="`${isQuerying ? 'Loading...' : 'Available APIs' }`" />
     <div>{{ apis }}</div>
   </div>
 </template>
@@ -15,11 +15,13 @@ export default {
   computed: {
     ...mapGetters({
       apis: 'apis',
+      isQuerying: 'isQuerying',
     }),
   },
   mounted() {
-    console.log(this)
-    this.fetchApi();
+    let title = 'geo';
+    let category = 'animals';
+    this.fetchApi({ title, category });
   },
   methods: mapActions(['fetchApi']),
 };

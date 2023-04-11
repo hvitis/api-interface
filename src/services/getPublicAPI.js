@@ -1,12 +1,16 @@
 import axios from 'axios';
 
-export default (title) =>
+export default (title, category) =>
   new Promise((resolve, reject) => {
-    let BASE_URL = `https://api.publicapis.org/entries`;
+    let BASE_URL = `https://api.publicapis.org/entries?`;
 
     if (title) {
-      BASE_URL += `?title=${title}`;
+      BASE_URL += `title=${title}&`;
     }
+    if (category) {
+      BASE_URL += `title=${category}&`;
+    }
+
     function checkStatus(response, resolve, reject) {
       const { status, data } = response;
       if (status >= 200 && status < 300) {

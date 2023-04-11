@@ -7,10 +7,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isQuerying: false,
-    apis: ['Dev'],
+    apis: [],
   },
   getters: {
     apis: (state) => state.apis,
+    isQuerying: (state) => state.isQuerying,
   },
   mutations: {
     loadApis(state, apis) {
@@ -18,15 +19,13 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async fetchApi(context, { title }) {
-      console.log('Run fetching');
+    async fetchApi(context, { title, category }) {
       context.state.isQuerying = true;
       try {
-        const data = await getPublicAPI(title);
-        console.log(data);
-        //   context.commit('loadApis', {
-        //     apis: data.entries,
-        //   });
+        const data = await getPublicAPI(title, category);
+        context.commit('loadApis', {
+          apis: data.entries,
+        });
       } catch (error) {
         console.log(error);
       }
