@@ -8,7 +8,7 @@ export default (title, category) =>
       BASE_URL += `title=${title}&`;
     }
     if (category) {
-      BASE_URL += `title=${category}&`;
+      BASE_URL += `category=${category}&`;
     }
 
     function checkStatus(response, resolve, reject) {

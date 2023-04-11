@@ -10,7 +10,11 @@
         outlined
         v-model="title"
       ></v-text-field>
-      <!-- Insert Filter selector here -->
+
+      <filter-api
+        @selectedCategories="queryByCategory"
+        max-width="500"
+      ></filter-api>
     </v-row>
     <TableApi :isQuerying="isQuerying">
       <CardApi
@@ -32,9 +36,10 @@ import { mapGetters, mapActions } from 'vuex';
 import TableApi from '@/components/TableApi.vue';
 import CardApi from '@/components/CardApi.vue';
 import debounce from 'lodash/debounce';
+import FilterApi from '@/components/FilterApi.vue';
 
 export default {
-  components: { TableApi, CardApi },
+  components: { TableApi, CardApi, FilterApi },
   data() {
     return {
       currentPage: 1,
@@ -65,6 +70,10 @@ export default {
     queryByTitle: debounce(function (event) {
       this.fetchApi({ title: event, category: this.category });
     }, 800),
+    queryByCategory: debounce(function (event) {
+      this.category = event;
+      this.fetchApi({ title: this.title, category: this.category });
+    }, 2000),
   },
 };
 </script>

@@ -25,7 +25,12 @@ export default new Vuex.Store({
       state.selectedApis = apis.slice(0, PAGE_SIZE);
     },
     setPages(state, apis) {
-      state.pagesAvailable = Math.ceil(apis.length / PAGE_SIZE);
+      state.pagesAvailable = Math.ceil(apis / PAGE_SIZE);
+    },
+    clearState(state) {
+      state.pagesAvailable = 1;
+      state.allPublicApis = null;
+      state.selectedApis = null;
     },
   },
   actions: {
@@ -33,8 +38,12 @@ export default new Vuex.Store({
       context.state.isQuerying = true;
       try {
         const data = await getPublicAPI(title, category);
-        context.commit('loadApis', data.entries);
-        context.commit('setPages', data.entries);
+        if (data.count !== 0) {
+          context.commit('loadApis', data.entries);
+          context.commit('setPages', data.entries.length);
+        } else {
+          context.commit('clearState');
+        }
       } catch (error) {
         console.log(error);
       }
