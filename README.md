@@ -6,6 +6,8 @@ Project was developed with:
 - Vuetify 2
 - Vuex 3
 
+APIs shown on the dashboard come from [public-api][0] project.
+
 ## Project setup
 
 In order to run the project on localhost execute:
@@ -25,3 +27,6 @@ npm run build
 ### Customize configuration
 
 Project was set up using Vue-cli. For more information see [Configuration Reference](https://cli.vuejs.org/config/).
+
+<!-- Links -->
+[0]: https://api.publicapis.org/
