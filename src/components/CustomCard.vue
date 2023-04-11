@@ -26,7 +26,7 @@
       <custom-pill :title="item.Category"></custom-pill>
     </v-card-text>
     <v-card-actions>
-      <v-btn text color="blue darken-2" :href="item.Link"> Learn More </v-btn>
+      <v-btn text color="blue darken-2" :href="item.Link" target="_blank"> Learn More </v-btn>
     </v-card-actions>
   </v-card>
 </template>

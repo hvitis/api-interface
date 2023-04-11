@@ -13,27 +13,27 @@
 
       <filter-api-selector
         @selectedCategories="queryByCategory"
-        max-width="500"
       ></filter-api-selector>
     </v-row>
-    <table-api :isQuerying="isQuerying" v-if="selectedApis">
+    <table-api :isQuerying="isQuerying">
       <custom-card
         v-for="(item, index) of selectedApis"
         :key="index"
         :item="item"
       />
       <v-container>
-        <v-row>
+        <v-row class="d-flex justify-center">
           <v-pagination
             v-if="selectedApis"
             v-model="currentPage"
             class="my-4"
             :length="pagesAvailable"
+            :total-visible="7"
           ></v-pagination>
         </v-row>
       </v-container>
     </table-api>
-    <div v-else>
+    <div  v-if="!selectedApis">
       <v-alert shaped dark color="info">
         There is no APIs for the given query. Try changing the search
         parameters.

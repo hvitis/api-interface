@@ -2,8 +2,7 @@
   <v-row dense class="d-flex flex-row mb-6 px-4">
     <v-sheet
       v-if="isQuerying"
-      color="grey lighten-4"
-      class="d-flex flex-row flex-wrap mx-auto"
+      class="d-flex flex-row flex-wrap mx-auto justify-center"
     >
       <v-skeleton-loader
         v-for="(item, index) in 20"
@@ -15,7 +14,6 @@
     </v-sheet>
     <v-sheet
       v-else
-      color="grey-lighten-2"
       class="d-flex flex-row flex-wrap mx-auto justify-center"
     >
       <slot></slot>
