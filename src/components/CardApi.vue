@@ -1,10 +1,13 @@
 <template>
-  <v-card class="my-2" max-width="344">
+  <v-card class="ma-1 d-flex flex-column card-outter" max-width="255">
     <v-card-title>
       {{ item.API }}
     </v-card-title>
     <v-card-text>
       <p>{{ item.Description }}</p>
+    </v-card-text>
+    <v-spacer></v-spacer>
+    <v-card-text>
       <CustomPill
         :icon="!item.HTTPS ? 'mdi-key-alert' : 'mdi-shield-key'"
         title="HTTPS"
@@ -23,7 +26,7 @@
       <CustomPill :title="item.Category"></CustomPill>
     </v-card-text>
     <v-card-actions>
-      <v-btn text color="indigo darken-3"> Learn More </v-btn>
+      <v-btn text color="blue darken-2" :href="item.Link"> Learn More </v-btn>
     </v-card-actions>
   </v-card>
 </template>
