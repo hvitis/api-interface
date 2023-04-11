@@ -35,7 +35,8 @@
     </table-api>
     <div v-else>
       <v-alert shaped dark color="info">
-        There is no APIs for the given query. Try changing the search parameters.
+        There is no APIs for the given query. Try changing the search
+        parameters.
       </v-alert>
     </div>
   </div>
