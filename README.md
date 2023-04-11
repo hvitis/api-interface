@@ -1,24 +1,27 @@
-# api-interface
+# Public APIs Dashboard 📌
+
+Project was developed with:
+
+- VueJS 2
+- Vuetify 2
+- Vuex 3
 
 ## Project setup
-```
-yarn install
+
+In order to run the project on localhost execute:
+
+```shell
+npm i & npm run dev
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+### Production
 
-### Compiles and minifies for production
-```
-yarn build
-```
+Project is hosted on Netlify. In order to build it execute:
 
-### Lints and fixes files
-```
-yarn lint
+```shell
+npm run build
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+Project was set up using Vue-cli. For more information see [Configuration Reference](https://cli.vuejs.org/config/).
