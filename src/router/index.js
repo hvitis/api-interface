@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import DashboardList from '@/views/DashboardList.vue';
 
 Vue.use(VueRouter);
 
@@ -8,7 +7,8 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: DashboardList,
+    component: () =>
+      import(/* webpackChunkName: "about" */ '@/views/DashboardList.vue'),
   },
   {
     path: '/about',
