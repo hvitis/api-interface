@@ -8,22 +8,22 @@
     </v-card-text>
     <v-spacer></v-spacer>
     <v-card-text>
-      <CustomPill
+      <custom-pill
         :icon="!item.HTTPS ? 'mdi-key-alert' : 'mdi-shield-key'"
         title="HTTPS"
         :isPresent="item.HTTPS"
-      ></CustomPill>
-      <CustomPill
+      ></custom-pill>
+      <custom-pill
         :icon="item.Cors === 'yes' ? 'mdi-shield' : 'mdi-shield-alert'"
         title="CORS"
         :isPresent="item.Cors === 'yes'"
-      ></CustomPill>
-      <CustomPill
+      ></custom-pill>
+      <custom-pill
         :icon="!item.Auth ? 'mdi-lock' : 'mdi-lock-off'"
         title="Auth"
         :isPresent="!item.Auth"
-      ></CustomPill>
-      <CustomPill :title="item.Category"></CustomPill>
+      ></custom-pill>
+      <custom-pill :title="item.Category"></custom-pill>
     </v-card-text>
     <v-card-actions>
       <v-btn text color="blue darken-2" :href="item.Link"> Learn More </v-btn>

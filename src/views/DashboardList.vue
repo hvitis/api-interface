@@ -11,35 +11,45 @@
         v-model="title"
       ></v-text-field>
 
-      <filter-api
+      <filter-api-selector
         @selectedCategories="queryByCategory"
         max-width="500"
-      ></filter-api>
+      ></filter-api-selector>
     </v-row>
-    <TableApi :isQuerying="isQuerying">
-      <CardApi
+    <table-api :isQuerying="isQuerying" v-if="selectedApis">
+      <custom-card
         v-for="(item, index) of selectedApis"
         :key="index"
         :item="item"
       />
-    </TableApi>
-    <v-pagination
-      v-model="currentPage"
-      class="my-4"
-      :length="pagesAvailable"
-    ></v-pagination>
+      <v-container>
+        <v-row>
+          <v-pagination
+            v-if="selectedApis"
+            v-model="currentPage"
+            class="my-4"
+            :length="pagesAvailable"
+          ></v-pagination>
+        </v-row>
+      </v-container>
+    </table-api>
+    <div v-else>
+      <v-alert shaped dark color="info">
+        There is no APIs for the given query. Try changing the search parameters.
+      </v-alert>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import TableApi from '@/components/TableApi.vue';
-import CardApi from '@/components/CardApi.vue';
+import CustomCard from '@/components/CustomCard.vue';
 import debounce from 'lodash/debounce';
-import FilterApi from '@/components/FilterApi.vue';
+import FilterApiSelector from '@/components/FilterApiSelector.vue';
 
 export default {
-  components: { TableApi, CardApi, FilterApi },
+  components: { TableApi, CustomCard, FilterApiSelector },
   data() {
     return {
       currentPage: 1,
@@ -73,7 +83,7 @@ export default {
     queryByCategory: debounce(function (event) {
       this.category = event;
       this.fetchApi({ title: this.title, category: this.category });
-    }, 2000),
+    }, 1200),
   },
 };
 </script>
