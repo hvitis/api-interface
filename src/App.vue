@@ -1,12 +1,7 @@
 <template>
-  <v-app>
-    <dashboard-layout>
-      <v-main>
-        <router-view />
-        <slot></slot>
-      </v-main>
-    </dashboard-layout>
-  </v-app>
+  <dashboard-layout>
+    <slot></slot>
+  </dashboard-layout>
 </template>
 
 <script>

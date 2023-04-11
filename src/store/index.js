@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isQuerying: false,
-    apis: [],
+    apis: null,
   },
   getters: {
     apis: (state) => state.apis,
@@ -23,9 +23,8 @@ export default new Vuex.Store({
       context.state.isQuerying = true;
       try {
         const data = await getPublicAPI(title, category);
-        context.commit('loadApis', {
-          apis: data.entries,
-        });
+        context.commit('loadApis', data.entries);
+        console.log(data.entries);
       } catch (error) {
         console.log(error);
       }
